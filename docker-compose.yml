@@ -1,0 +1,7 @@
+version: "3.6"
+services:
+    node1:
+        build: ./node
+        ports:
+            - 5000:5000
+        restart: always
