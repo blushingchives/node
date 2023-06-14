@@ -70,7 +70,7 @@ RUN wget -O wasmonly.tar.lz4 https://snapshots.polkachu.com/wasm/kujira/wasmonly
 RUN lz4 -c -d wasmonly.tar.lz4  | tar -x -C $HOME/.kujira
 RUN rm wasmonly.tar.lz4
 
-RUN wget -O addrbook.json https://snapshots.polkachu.com/addrbook/kujira/addrbook.json --inet4-only
-RUN mv addrbook.json ~/.kujira/config
+# RUN wget -O addrbook.json https://snapshots.polkachu.com/addrbook/kujira/addrbook.json --inet4-only
+# RUN mv addrbook.json ~/.kujira/config
 CMD kujirad start
 # RUN cd $HOME/kujira-core && git checkout v0.8.7
