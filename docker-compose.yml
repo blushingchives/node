@@ -3,7 +3,7 @@ name: cosmos-rpc
 services:
     load-balancer:
         build:
-            context: ./node
+            context: ./haproxy
             dockerfile: Dockerfile
         container_name: load-balancer
         hostname: load-balancer
