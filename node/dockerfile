@@ -82,5 +82,5 @@ RUN sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOM
 
 # RUN wget -O addrbook.json https://snapshots.polkachu.com/addrbook/kujira/addrbook.json --inet4-only
 # RUN mv addrbook.json ~/.kujira/config
-CMD kujirad start
+CMD ["kujirad", "start"]
 # RUN cd $HOME/kujira-core && git checkout v0.8.7

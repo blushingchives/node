@@ -1,16 +1,55 @@
 version: "3.6"
+name: cosmos-rpc
 services:
-    node1:
-        build: ./node
-        ports:
-            - 1317:1317
-            - 6060:6060
-            - 8098:8080
-            - 9090:9090
-            - 9091:9091
-            - 26656:26656
-            - 26657:26657
-            - 26658:26658
-            - 26660:26660
-            - 55667:55667
+    load-balancer:
+        build:
+            context: ./node
+            dockerfile: Dockerfile
+        container_name: load-balancer
+        hostname: load-balancer
+        image: load-balancer
         restart: always
+        ports:
+            - 26657:26657
+    node1:
+        build:
+            context: ./node
+            dockerfile: Dockerfile
+            args:
+                GO_VERSION: 1.19.7
+                BINARY_VERSION: v0.8.7
+        container_name: node1
+        hostname: node1
+        # ports:
+        #     - 1317:1317
+        #     - 6060:6060
+        #     - 8098:8080
+        #     - 9090:9090
+        #     - 9091:9091
+        #     - 26656:26656
+        # - 26657:26657
+        #     - 26658:26658
+        #     - 26660:26660
+        #     - 55667:55667
+        image: node
+        restart: always
+    # node2:
+    #     image: node
+    #     container_name: node2
+    #     hostname: node2
+    #     ports:
+    #         #     - 1317:1317
+    #         #     - 6060:6060
+    #         #     - 8098:8080
+    #         #     - 9090:9090
+    #         #     - 9091:9091
+    #         #     - 26656:26656
+    #         - 26658:26657
+    #     #     - 26658:26658
+    #     #     - 26660:26660
+    #     #     - 55667:55667
+    #     restart: always
+networks:
+    default:
+        name: cosmos-net
+        external: true
