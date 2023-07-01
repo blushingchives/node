@@ -34,22 +34,22 @@ services:
         #     - 55667:55667
         image: node
         restart: always
-    # node2:
-    #     image: node
-    #     container_name: node2
-    #     hostname: node2
-    #     ports:
-    #         #     - 1317:1317
-    #         #     - 6060:6060
-    #         #     - 8098:8080
-    #         #     - 9090:9090
-    #         #     - 9091:9091
-    #         #     - 26656:26656
-    #         - 26658:26657
-    #     #     - 26658:26658
-    #     #     - 26660:26660
-    #     #     - 55667:55667
-    #     restart: always
+    node2:
+        image: node
+        container_name: node2
+        hostname: node2
+        # ports:
+        #     - 1317:1317
+        #     - 6060:6060
+        #     - 8098:8080
+        #     - 9090:9090
+        #     - 9091:9091
+        #     - 26656:26656
+        # - 26658:26657
+        #     - 26658:26658
+        #     - 26660:26660
+        #     - 55667:55667
+        restart: always
 # networks:
 #     default:
 #         name: cosmos-net
