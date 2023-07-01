@@ -70,7 +70,7 @@ RUN sed -i "s|laddr = \"tcp://127.0.0.1:26657\"|laddr = \"tcp://0.0.0.0:26657\"|
 # Statesync
 # ============================
 RUN kujirad tendermint unsafe-reset-all --home $HOME/.kujira
-RUN RPC=https://kujira-rpc.polkachu.com:443 && LATEST_HEIGHT=$(curl -s ${RPC}/block | jq -r .result.block.header.height) && TRUST_HEIGHT=$((LATEST_HEIGHT - 2000)) && TRUST_HASH=$(curl -s ${RPC}/block?height=${TRUST_HEIGHT} | jq -r .result.block_id.hash) && sed -i.bak -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
+RUN RPC=https://rpc-kujira.mintthemoon.xyz:443 && LATEST_HEIGHT=$(curl -s ${RPC}/block | jq -r .result.block.header.height) && TRUST_HEIGHT=$((LATEST_HEIGHT - 2000)) && TRUST_HASH=$(curl -s ${RPC}/block?height=${TRUST_HEIGHT} | jq -r .result.block_id.hash) && sed -i.bak -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
 s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$RPC,$RPC\"| ; \
 s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$TRUST_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" $HOME/.kujira/config/config.toml
