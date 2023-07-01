@@ -49,7 +49,7 @@ services:
     #     #     - 26660:26660
     #     #     - 55667:55667
     #     restart: always
-networks:
-    default:
-        name: cosmos-net
-        external: true
+# networks:
+#     default:
+#         name: cosmos-net
+#         external: true
