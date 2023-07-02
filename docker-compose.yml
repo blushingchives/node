@@ -1,6 +1,16 @@
 version: "3.6"
 name: cosmos-rpc
 services:
+    nginx:
+        build:
+            context: ./nginx
+            dockerfile: Dockerfile
+        container_name: nginx
+        hostname: nginx
+        image: nginx
+        restart: always
+        ports:
+            - 80:80
     load-balancer:
         build:
             context: ./haproxy
