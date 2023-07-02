@@ -12,7 +12,6 @@ services:
         ports:
             - 26657:26657
             - 1317:1317
-        command: [nginx-debug, "-g", "daemon off;"]
     node1:
         build:
             context: ./node
