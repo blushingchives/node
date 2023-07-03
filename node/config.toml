@@ -206,7 +206,7 @@ laddr = "tcp://0.0.0.0:26656"
 # and will introspect on the listener or use UPnP
 # to figure out the address. ip and port are required
 # example: 159.89.10.97:26656
-external_address = "178.211.139.222:26656"
+external_address = "178.211.139.222:10006"
 
 # Comma separated list of seed nodes to connect to
 seeds = "ade4d8bc8cbe014af6ebdf3cb7b1e9ad36f412c0@seeds.polkachu.com:11856"
