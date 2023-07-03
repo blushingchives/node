@@ -43,6 +43,21 @@ services:
         container_name: node3
         hostname: node3
         restart: always
+    node4:
+        image: node
+        container_name: node4
+        hostname: node4
+        restart: always
+    node5:
+        image: node
+        container_name: node5
+        hostname: node5
+        restart: always
+    node6:
+        image: node
+        container_name: node6
+        hostname: node6
+        restart: always
 networks:
     default:
         name: cosmos-net
