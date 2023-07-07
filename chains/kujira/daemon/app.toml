@@ -1,0 +1,203 @@
+# This is a TOML config file.
+# For more information, see https://github.com/toml-lang/toml
+
+###############################################################################
+###                           Base Configuration                            ###
+###############################################################################
+
+# The minimum gas prices a validator is willing to accept for processing a
+# transaction. A transaction's fees must meet the minimum of any denomination
+# specified in this config (e.g. 0.25token1;0.0001token2).
+minimum-gas-prices = "0.00119ukuji,0.00150factory/kujira1qk00h5atutpsv900x202pxx42npjr9thg58dnqpa72f2p7m2luase444a7/uusk,0.00150ibc/295548A78785A1007F232DE286149A6FF512F180AF5657780FC89C009E2C348F,0.000125ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2,0.00126ibc/47BD209179859CDE4A2806763D7189B6E6FE13A17880FE2B42DE1E6C1E329E23,0.00652ibc/3607EB5B5E64DD1C0E12E07F077FF470D5BC4706AFCBC98FE1BA960E5AE4CE07,617283951ibc/F3AA7EF362EC5E791FE78A0F4CCC69FEE1F9A7485EB1A8CAB3F6601C00522F10,0.000288ibc/EFF323CC632EC4F747C61BCE238A758EFDB7699C3226565F7C20DA06509D59A5,0.000125ibc/DA59C009A0B3B95E0549E6BF7B075C8239285989FF457A8EDDBB56F10B2A6986,0.00137ibc/A358D7F19237777AF6D8AD0E0F53268F8B18AE8A53ED318095C14D6D7F3B2DB5,0.0488ibc/4F393C3FCA4190C0A6756CE7F6D897D5D1BE57D6CCB80D0BC87393566A7B6602,78492936ibc/004EBF085BBED1029326D56BE8A2E67C08CECE670A94AC1947DF413EF5130EB2,964351ibc/1B38805B1C75352B28169284F96DF56BDEBD9E8FAC005BDCC8CF0378C82AA8E7"
+
+# default: the last 100 states are kept in addition to every 500th state; pruning at 10 block intervals
+# nothing: all historic states will be saved, nothing will be deleted (i.e. archiving node)
+# everything: all saved states will be deleted, storing only the current and previous state; pruning at 10 block intervals
+# custom: allow pruning options to be manually specified through 'pruning-keep-recent', 'pruning-keep-every', and 'pruning-interval'
+pruning = "custom"
+
+# These are applied if and only if the pruning strategy is custom.
+pruning-keep-recent = "117"
+pruning-keep-every = "0"
+pruning-interval = "13"
+
+# HaltHeight contains a non-zero block height at which a node will gracefully
+# halt and shutdown that can be used to assist upgrades and testing.
+#
+# Note: Commitment of state will be attempted on the corresponding block.
+halt-height = 0
+
+# HaltTime contains a non-zero minimum block time (in Unix seconds) at which
+# a node will gracefully halt and shutdown that can be used to assist upgrades
+# and testing.
+#
+# Note: Commitment of state will be attempted on the corresponding block.
+halt-time = 0
+
+# MinRetainBlocks defines the minimum block height offset from the current
+# block being committed, such that all blocks past this offset are pruned
+# from Tendermint. It is used as part of the process of determining the
+# ResponseCommit.RetainHeight value during ABCI Commit. A value of 0 indicates
+# that no blocks should be pruned.
+#
+# This configuration value is only responsible for pruning Tendermint blocks.
+# It has no bearing on application state pruning which is determined by the
+# "pruning-*" configurations.
+#
+# Note: Tendermint block pruning is dependant on this parameter in conunction
+# with the unbonding (safety threshold) period, state pruning and state sync
+# snapshot parameters to determine the correct minimum value of
+# ResponseCommit.RetainHeight.
+min-retain-blocks = 0
+
+# InterBlockCache enables inter-block caching.
+inter-block-cache = true
+
+# IndexEvents defines the set of events in the form {eventType}.{attributeKey},
+# which informs Tendermint what to index. If empty, all events will be indexed.
+#
+# Example:
+# ["message.sender", "message.recipient"]
+index-events = ["tx.hash", "tx.height"]
+
+# IavlCacheSize set the size of the iavl tree cache. 
+# Default cache size is 50mb.
+iavl-cache-size = 781250
+
+###############################################################################
+###                         Telemetry Configuration                         ###
+###############################################################################
+
+[telemetry]
+
+# Prefixed with keys to separate services.
+service-name = ""
+
+# Enabled enables the application telemetry functionality. When enabled,
+# an in-memory sink is also enabled by default. Operators may also enabled
+# other sinks such as Prometheus.
+enabled = false
+
+# Enable prefixing gauge values with hostname.
+enable-hostname = false
+
+# Enable adding hostname to labels.
+enable-hostname-label = false
+
+# Enable adding service to labels.
+enable-service-label = false
+
+# PrometheusRetentionTime, when positive, enables a Prometheus metrics sink.
+prometheus-retention-time = 0
+
+# GlobalLabels defines a global set of name/value label tuples applied to all
+# metrics emitted using the wrapper functions defined in telemetry package.
+#
+# Example:
+# [["chain_id", "cosmoshub-1"]]
+global-labels = [
+]
+
+###############################################################################
+###                           API Configuration                             ###
+###############################################################################
+
+[api]
+
+# Enable defines if the API server should be enabled.
+enable = false
+
+# Swagger defines if swagger documentation should automatically be registered.
+swagger = false
+
+# Address defines the API server to listen on.
+address = "tcp://0.0.0.0:1317"
+
+# MaxOpenConnections defines the number of maximum open connections.
+max-open-connections = 1000
+
+# RPCReadTimeout defines the Tendermint RPC read timeout (in seconds).
+rpc-read-timeout = 10
+
+# RPCWriteTimeout defines the Tendermint RPC write timeout (in seconds).
+rpc-write-timeout = 0
+
+# RPCMaxBodyBytes defines the Tendermint maximum response body (in bytes).
+rpc-max-body-bytes = 1000000
+
+# EnableUnsafeCORS defines if CORS should be enabled (unsafe - use it at your own risk).
+enabled-unsafe-cors = false
+
+###############################################################################
+###                           Rosetta Configuration                         ###
+###############################################################################
+
+[rosetta]
+
+# Enable defines if the Rosetta API server should be enabled.
+enable = false
+
+# Address defines the Rosetta API server to listen on.
+address = ":8080"
+
+# Network defines the name of the blockchain that will be returned by Rosetta.
+blockchain = "app"
+
+# Network defines the name of the network that will be returned by Rosetta.
+network = "network"
+
+# Retries defines the number of retries when connecting to the node before failing.
+retries = 3
+
+# Offline defines if Rosetta server should run in offline mode.
+offline = false
+
+###############################################################################
+###                           gRPC Configuration                            ###
+###############################################################################
+
+[grpc]
+
+# Enable defines if the gRPC server should be enabled.
+enable = true
+
+# Address defines the gRPC server address to bind to.
+address = "0.0.0.0:9090"
+
+###############################################################################
+###                        gRPC Web Configuration                           ###
+###############################################################################
+
+[grpc-web]
+
+# GRPCWebEnable defines if the gRPC-web should be enabled.
+# NOTE: gRPC must also be enabled, otherwise, this configuration is a no-op.
+enable = true
+
+# Address defines the gRPC-web server address to bind to.
+address = "0.0.0.0:9091"
+
+# EnableUnsafeCORS defines if CORS should be enabled (unsafe - use it at your own risk).
+enable-unsafe-cors = false
+
+###############################################################################
+###                        State Sync Configuration                         ###
+###############################################################################
+
+# State sync snapshots allow other nodes to rapidly join the network without replaying historical
+# blocks, instead downloading and applying a snapshot of the application state at a given height.
+[state-sync]
+
+# snapshot-interval specifies the block interval at which local state sync snapshots are
+# taken (0 to disable). Must be a multiple of pruning-keep-every.
+snapshot-interval = 0
+
+# snapshot-keep-recent specifies the number of recent snapshots to keep and serve (0 to keep all).
+snapshot-keep-recent = 2
+
+[wasm]
+# This is the maximum sdk gas (wasm and storage) that we allow for any x/wasm "smart" queries
+query_gas_limit = 1000000000
+# This is the number of wasm vm instances we keep cached in memory for speed-up
+# Warning: this is currently unstable and may lead to crashes, best to keep for 0 unless testing locally
+lru_size = 0
