@@ -41,9 +41,6 @@ COPY --from=build /dist/bin/* /usr/local/bin/
 COPY --from=build /bin/stty /bin/stty
 COPY --from=build /dist/lib/* /usr/lib/
 
-COPY app.toml /root/.kujira/config/app.toml
-COPY config.toml /root/.kujira/config/config.toml
-
 # RUN mkdir /root/.kujira
 # VOLUME /root/.kujira
 # USER nonroot:nonroot
