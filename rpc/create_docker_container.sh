@@ -44,9 +44,10 @@ if [[ -z $(docker image ls | grep "${daemon_name}") ]]; then
 fi
 
 docker stop ${container_name} && \
-docker rm ${container_name} --volumes || true && \
+docker rm ${container_name} && \
+docker volume rm ${container_name}-volume || true && \
 docker run \
-    -d \
+    -it \
     --volume ${container_name}-volume:${node_home} \
     --name ${container_name} \
     kujirad \
