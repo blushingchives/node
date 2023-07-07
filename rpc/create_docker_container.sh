@@ -46,7 +46,7 @@ fi
 docker stop ${container_name} && \
 docker rm ${container_name} --volumes || true && \
 docker run \
-    -it \
+    -d \
     --volume ${container_name}-volume:${node_home} \
     --name ${container_name} \
     kujirad \
