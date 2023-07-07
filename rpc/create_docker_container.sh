@@ -44,7 +44,7 @@ if [[ -z $(docker image ls | grep "${daemon_name}") ]]; then
 fi
 
 docker stop ${container_name} && \
-docker rm ${container_name} || true && \
+docker rm ${container_name} --volumes || true && \
 docker run \
     -it \
     --volume ${container_name}-volume:${node_home} \
