@@ -1,8 +1,9 @@
 # usage: ./docker_service_create.sh chain_name
 # eg., ./docker_service_create.sh kujira
 
-chain_name="$1"
-container_name="$2"
+daemon_version="$1"
+chain_name="$2"
+container_name="$3"
 
 # Check input params
 if [ -z $chain_name ]; then
@@ -43,27 +44,22 @@ if [[ -z $(docker image ls | grep "${daemon_name}") ]]; then
     exit
 fi
 
-docker stop ${container_name} && \
-docker rm ${container_name} && \
-docker volume rm ${container_name}-volume || true && \
+docker stop ${container_name}
+docker rm ${container_name}
+docker volume rm ${container_name}-volume
+
 docker run \
+    -p 26657:26657 \
+    -p 80:80 \
     -it \
     --volume ${container_name}-volume:${node_home} \
     --name ${container_name} \
-    kujirad \
+    ${daemon_version} \
     bash -c \
     " \
-    echo \"$(cat ../chains/${chain_name}/config/app.toml | sed 's/\"/<>!spacing<>/g')\" > /root/.kujira/config/app.toml && \
-    sed -i 's/<>!spacing<>/\"/g' /root/.kujira/config/app.toml && \
-    echo \"$(cat ../chains/${chain_name}/config/config.toml | sed 's/\"/<>!spacing<>/g')\" > /root/.kujira/config/config.toml && \
-    sed -i 's/<>!spacing<>/\"/g' /root/.kujira/config/config.toml && \
     $(cat run.sh) \
     "
-        # ls /root/.kujira/config \
-    # $(cat run.sh) \
-
-    #     """ \
-    # echo \"$(cat ../chains/${chain_name}/config/config.toml | sed 's/\"/<>!spacing<>/g')\" > /root/.kujira/config/config.toml | sed 's/| sed 's/\"/<>!spacing<>/g'/\"/g' && \
-    # echo \"$(cat ../chains/${chain_name}/config/app.toml | sed 's/\"/<>!spacing<>/g')\" > /root/.kujira/config/app.toml | sed 's/| sed 's/\"/<>!spacing<>/g'/\"/g' &&  \
-    # cat /root/.kujira/config/app.toml \
-    # """
+# echo \"$(cat ../chains/${chain_name}/config/app.toml | sed 's/\"/<>!spacing<>/g')\" > /root/.kujira/config/app.toml && \
+#     sed -i 's/<>!spacing<>/\"/g' /root/.kujira/config/app.toml && \
+#     echo \"$(cat ../chains/${chain_name}/config/config.toml | sed 's/\"/<>!spacing<>/g')\" > /root/.kujira/config/config.toml && \
+#     sed -i 's/<>!spacing<>/\"/g' /root/.kujira/config/config.toml && \
