@@ -39,7 +39,7 @@ echo "version: ${version}"
 echo "daemon_name: ${daemon_name}"
 echo "node_home: ${node_home}"
 
-if [[ -z $(docker image ls | grep "${daemon_name}") ]]; then
+if [[ -z $(docker image ls | grep "${daemon_version}") ]]; then
     echo "ERROR: Build chain daemon first."
     exit
 fi
@@ -49,11 +49,11 @@ docker rm ${container_name}
 docker volume rm ${container_name}-volume
 
 docker run \
-    -p 26657:26657 \
-    -p 80:80 \
-    -it \
+    --network cosmos-net \
+    -d \
     --volume ${container_name}-volume:${node_home} \
     --name ${container_name} \
+    --user root:root \
     ${daemon_version} \
     bash -c \
     " \
