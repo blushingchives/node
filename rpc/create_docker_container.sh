@@ -46,7 +46,7 @@ fi
 
 docker stop ${container_name}
 docker rm ${container_name}
-docker volume rm ${container_name}-volume
+# docker volume rm ${container_name}-volume
 
 docker run \
     --network cosmos-net \
