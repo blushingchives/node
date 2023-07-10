@@ -19,5 +19,5 @@ docker run \
     bash -c \
     " \
     echo \"$(cat ../chains/${chain_name}/config/haproxy.cfg)\" > /usr/local/etc/haproxy/haproxy.cfg && \
-    haproxy -f /usr/local/etc/haproxy/haproxy.cfg \
+    haproxy -f /usr/local/etc/haproxy/haproxy.cfg -d \
     "
