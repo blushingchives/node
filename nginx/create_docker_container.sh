@@ -4,7 +4,7 @@ docker rm public-proxy
 docker run \
     -p 80:80 \
     --network cosmos-net \
-    -d \
+    -it \
     --name public-proxy \
     --user root:root \
     nginx:1.18.0 \
@@ -14,5 +14,6 @@ docker run \
     cat /etc/nginx/nginx.conf && \
     sed -i 's/<>!spacing<>/\"/g' /etc/nginx/nginx.conf && \
     sed -i 's/<>!dollar<>/\$/g' /etc/nginx/nginx.conf && \
-    /usr/sbin/nginx \
+    /usr/sbin/nginx && \
+    while true; do sleep 5; done \
     "
