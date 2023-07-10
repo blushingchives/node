@@ -4,7 +4,7 @@ docker rm public-proxy
 docker run \
     -p 80:80 \
     --network cosmos-net \
-    -it \
+    -d \
     --name public-proxy \
     --user root:root \
     nginx:1.18.0 \
