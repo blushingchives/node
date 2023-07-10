@@ -12,7 +12,7 @@ docker rm ${chain_name}-loadbalancer
 docker run \
     -p 26657:26657 \
     --network cosmos-net \
-    -it \
+    -d \
     --name ${chain_name}-loadbalancer \
     --user root:root \
     haproxy:2.8 \
