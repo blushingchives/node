@@ -3,7 +3,7 @@ kujirad init node --chain-id kaiyo-1 --home /root/.kujira
 
 curl -s -H 'Cache-Control: no-cache' -o /root/.kujira/config/config.toml https://raw.githubusercontent.com/blushingchives/node/main/chains/kujira/config/config.toml
 curl -s -H 'Cache-Control: no-cache' -o /root/.kujira/config/app.toml https://raw.githubusercontent.com/blushingchives/node/main/chains/kujira/config/app.toml
-curl -s -H 'Cache-Control: no-cache' -o /etc/nginx/nginx.conf https://raw.githubusercontent.com/blushingchives/node/main/chains/kujira/config/nginx.conf
+curl -s -H 'Cache-Control: no-cache' -o /etc/nginx/nginx.conf https://raw.githubusercontent.com/blushingchives/node/main/rpc/nginx.conf
 
 SEEDS=ade4d8bc8cbe014af6ebdf3cb7b1e9ad36f412c0@seeds.polkachu.com:11856,63158c2af0d639d8105a8e6ca2c53dc243dd156f@seed.kujira.mintserve.org:31897
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/" /root/.kujira/config/config.toml
