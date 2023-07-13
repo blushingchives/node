@@ -58,7 +58,7 @@ inter-block-cache = true
 #
 # Example:
 # ["message.sender", "message.recipient"]
-index-events = []
+index-events = ["tx.hash", "tx.height"]
 
 # IavlCacheSize set the size of the iavl tree cache. 
 # Default cache size is 50mb.
