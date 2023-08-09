@@ -6,13 +6,18 @@ chain_name="$2"
 container_name="$3"
 
 # Check input params
+if [ -z $daemon_version ]; then
+    echo "ERROR: No daemon_version specified. Usage ./create_docker_container.sh kujira-v0.8.7 kujira kujira-1"
+    exit
+fi
+
 if [ -z $chain_name ]; then
-    echo "ERROR: No chain_name specified. Usage ./create_docker_container.sh kujira kujira-v1"
+    echo "ERROR: No chain_name specified. Usage ./create_docker_container.sh kujira-v0.8.7 kujira kujira-1"
     exit
 fi
 
 if [ -z $container_name ]; then
-    echo "ERROR: No docker_volume specified. Usage ./create_docker_container.sh kujira kujira-v1"
+    echo "ERROR: No docker_volume specified. Usage ./create_docker_container.sh kujira-v0.8.7 kujira kujira-1"
     exit
 fi
 
