@@ -15,8 +15,4 @@ if [ -z $version ]; then
     exit
 fi
 
-# docker build -t ${chain_name}-${version} -f ${chain_name}-${version} "$(pwd)/${chain_name}/daemon"
-# docker build -t ${chain_name}-${version} "$(pwd)/${chain_name}/daemon/${version}"
-docker rmi $(docker images --format "{{.Repository}}:{{.Tag}}" | grep "<none>")
-docker rmi $(docker images --format "{{.Repository}}:{{.Tag}}" | grep "${chain_name}")
 docker build -t ${chain_name}-${version} ./${chain_name}/daemon/${version}
