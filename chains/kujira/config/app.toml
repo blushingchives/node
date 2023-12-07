@@ -17,9 +17,9 @@ minimum-gas-prices = "0.00119ukuji,0.00150factory/kujira1qk00h5atutpsv900x202pxx
 pruning = "custom"
 
 # These are applied if and only if the pruning strategy is custom.
-pruning-keep-recent = "117"
+pruning-keep-recent = "57"
 pruning-keep-every = "0"
-pruning-interval = "13"
+pruning-interval = "5"
 
 # HaltHeight contains a non-zero block height at which a node will gracefully
 # halt and shutdown that can be used to assist upgrades and testing.
