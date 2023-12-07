@@ -15,4 +15,6 @@ if [ -z $version ]; then
     exit
 fi
 
-docker build -t ${chain_name}-${version} ./${chain_name}/daemon/${version}
+BASEDIR=$(dirname $0)
+
+docker build -t ${chain_name}-${version} ${BASEDIR}/${chain_name}/daemon/${version}
