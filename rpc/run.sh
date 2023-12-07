@@ -19,6 +19,7 @@ sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" /root/.k
 
 SNAPSHOTBLOCK=15897065
 wget -O snapshot.tar.lz4 https://snapshots.polkachu.com/snapshots/kujira/kujira_${SNAPSHOTBLOCK}.tar.lz4 --inet4-only
+kujirad tendermint unsafe-reset-all --home /root/.kujira --keep-addr-book
 lz4 -c -d snapshot.tar.lz4  | tar -x -C /root/.kujira
 rm -v snapshot.tar.lz4
 
