@@ -42,6 +42,7 @@ cat > "$HOME/cron_scripts/$container_name-$new_chain_version.sh" << EOL
 
 STATUS=\$(docker exec $container_name kujirad status)
 HEIGHT=\$(echo \$STATUS | jq -r '.SyncInfo.latest_block_height')
+echo "$container_name | \$STATUS"
 
 if [[ \$HEIGHT == "$new_chain_height" ]]; then
     $home_path/rpc/create_docker_container.sh $new_chain_version $chain_name $container_name
