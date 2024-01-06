@@ -35,10 +35,8 @@ if ! docker images --format "{{.Repository}}" | grep -q "^${new_chain_version}$"
     exit 1
 fi
 
-# Create a temporary directory for storing the cron job script
-temp_dir=$(mktemp -d)
 # Create the cron job script
-cat > "$temp_dir/cron_script.sh" << EOL
+cat > "$HOME/cron_scripts/$container_name-$new_chain_version.sh" << EOL
 #!/bin/bash
 
 STATUS=\$(docker exec $container_name kujirad status)
@@ -47,15 +45,9 @@ HEIGHT=\$(echo \$STATUS | jq -r '.SyncInfo.latest_block_height')
 if [[ \$HEIGHT == "$new_chain_height" ]]; then
     $home_path/rpc/create_docker_container.sh $new_chain_version $chain_name $container_name
 
-    rm -f "\$HOME/.cron.d/cronjob"
+    rm -f "$HOME/cron_scripts/$container_name-$new_chain_version.sh"
 fi
 EOL
 
 # Make the cron script executable
-chmod +x "$temp_dir/cron_script.sh"
-
-# Add the cron job to run every minute
-echo "* * * * * $temp_dir/cron_script.sh" > "$HOME/.cron.d/cronjob"
-
-# Clean up temporary directory
-rm -rf "$temp_dir"
+chmod +x "$HOME/cron_scripts/$container_name-$new_chain_version.sh"
