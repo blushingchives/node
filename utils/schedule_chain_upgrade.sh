@@ -36,7 +36,7 @@ if ! docker images --format "{{.Repository}}" | grep -q "^${new_chain_version}$"
 fi
 
 # Create the cron job script
-mkdir $HOME/cron_scripts
+mkdir -p $HOME/cron_scripts
 cat > "$HOME/cron_scripts/$container_name-$new_chain_version.sh" << EOL
 #!/bin/bash
 
