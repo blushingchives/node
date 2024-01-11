@@ -21,11 +21,11 @@ sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/" /root/.kujira/config/config.to
 # s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" /root/.kujira/config/config.toml
 
 # SNAPSHOTBLOCK=15897065
-# echo "Getting Snapshot..."
-# wget --no-verbose -O snapshot.tar.lz4 https://snapshots.polkachu.com/snapshots/kujira/kujira_${SNAPSHOTBLOCK}.tar.lz4 --inet4-only
-# kujirad tendermint unsafe-reset-all --home /root/.kujira --keep-addr-book
-# lz4 -c -d snapshot.tar.lz4  | tar -x -C /root/.kujira
-# rm -v snapshot.tar.lz4
+echo "Getting Snapshot..."
+wget --no-verbose -O snapshot.tar.lz4 https://snapshots.lavenderfive.com/snapshots/kujira/latest.tar.lz4 --inet4-only
+kujirad tendermint unsafe-reset-all --home /root/.kujira --keep-addr-book
+lz4 -c -d snapshot.tar.lz4  | tar -x -C /root/.kujira
+rm -v snapshot.tar.lz4
 
 /usr/sbin/nginx
 kujirad start
