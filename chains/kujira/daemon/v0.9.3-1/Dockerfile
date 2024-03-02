@@ -35,7 +35,7 @@ RUN mkdir kujira bin lib \
 FROM ubuntu:22.04
 
 RUN apt update -y
-RUN apt install wget jq curl nginx lz4 -y
+RUN apt install wget jq curl nginx lz4 cron -y
 
 COPY --from=build --chown=nonroot:nonroot /dist/kujira /kujira
 COPY --from=build /dist/bin/* /usr/local/bin/
